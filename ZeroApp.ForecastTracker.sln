@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroApp.ForecastTracker.Client", "ZeroApp.ForecastTracker.Client\ZeroApp.ForecastTracker.Client.csproj", "{707B1561-A45C-4CD5-BECD-DB0B64DB3F8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{14755518-29B3-4F08-AA20-A194654E354E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZeroApp.ForecastTracker.Service", "ZeroApp.ForecastTracker.Service", "{42534FDB-6066-4008-9668-FB59C25ED0F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroApp.ForecastTracker.Service.Contracts", "ZeroApp.ForecastTracker.Service.Contracts1\ZeroApp.ForecastTracker.Service.Contracts.csproj", "{D34663A9-3802-4F64-BD24-CACF26AD256B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroApp.ForecastTracker.Service.Application", "ZeroApp.ForecastTracker.Service.Application\ZeroApp.ForecastTracker.Service.Application.csproj", "{09774F86-8EF7-47CF-910C-4F9F30B6A85D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroApp.ForecastTracker.Service.Domain", "ZeroApp.ForecastTracker.Service.Domain\ZeroApp.ForecastTracker.Service.Domain.csproj", "{B6B0C561-318D-429A-9652-6100D88C8455}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroApp.ForecastTracker.Service.Infrastructure", "ZeroApp.ForecastTracker.Service.Infrastructure\ZeroApp.ForecastTracker.Service.Infrastructure.csproj", "{06AC1090-F3C6-4D01-8DBB-02C5B68ECD2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{339A3F76-AABA-4AF9-A29A-A210CD927BA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{707B1561-A45C-4CD5-BECD-DB0B64DB3F8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{707B1561-A45C-4CD5-BECD-DB0B64DB3F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{707B1561-A45C-4CD5-BECD-DB0B64DB3F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{707B1561-A45C-4CD5-BECD-DB0B64DB3F8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D34663A9-3802-4F64-BD24-CACF26AD256B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D34663A9-3802-4F64-BD24-CACF26AD256B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D34663A9-3802-4F64-BD24-CACF26AD256B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D34663A9-3802-4F64-BD24-CACF26AD256B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09774F86-8EF7-47CF-910C-4F9F30B6A85D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09774F86-8EF7-47CF-910C-4F9F30B6A85D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09774F86-8EF7-47CF-910C-4F9F30B6A85D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09774F86-8EF7-47CF-910C-4F9F30B6A85D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B0C561-318D-429A-9652-6100D88C8455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B0C561-318D-429A-9652-6100D88C8455}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B0C561-318D-429A-9652-6100D88C8455}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B0C561-318D-429A-9652-6100D88C8455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06AC1090-F3C6-4D01-8DBB-02C5B68ECD2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06AC1090-F3C6-4D01-8DBB-02C5B68ECD2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06AC1090-F3C6-4D01-8DBB-02C5B68ECD2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06AC1090-F3C6-4D01-8DBB-02C5B68ECD2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{42534FDB-6066-4008-9668-FB59C25ED0F6} = {14755518-29B3-4F08-AA20-A194654E354E}
+		{D34663A9-3802-4F64-BD24-CACF26AD256B} = {42534FDB-6066-4008-9668-FB59C25ED0F6}
+		{09774F86-8EF7-47CF-910C-4F9F30B6A85D} = {42534FDB-6066-4008-9668-FB59C25ED0F6}
+		{B6B0C561-318D-429A-9652-6100D88C8455} = {42534FDB-6066-4008-9668-FB59C25ED0F6}
+		{06AC1090-F3C6-4D01-8DBB-02C5B68ECD2A} = {42534FDB-6066-4008-9668-FB59C25ED0F6}
+		{339A3F76-AABA-4AF9-A29A-A210CD927BA6} = {42534FDB-6066-4008-9668-FB59C25ED0F6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0C02A7D6-EF1D-4042-9776-394D501EB301}
+	EndGlobalSection
+EndGlobal
