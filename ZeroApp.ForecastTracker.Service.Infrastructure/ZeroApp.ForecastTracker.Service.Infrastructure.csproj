@@ -53,8 +53,12 @@
     <Compile Include="Entities\Location.cs" />
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Exceptions\InfrastructureException.cs" />
-    <Compile Include="ExternalService\ExternalService.cs" />
+    <Compile Include="ExternalService\ExternalRestServiceBase.cs" />
+    <Compile Include="ExternalService\ExternalForecastService.cs" />
+    <Compile Include="ExternalService\GeoLocationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\GeoLocationServiceSettings.cs" />
+    <Compile Include="Settings\ExternalForecastServiceSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZeroApp.ForecastTracker.Service.Application\ZeroApp.ForecastTracker.Service.Application.csproj">

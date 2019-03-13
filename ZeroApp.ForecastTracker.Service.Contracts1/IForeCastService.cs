@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using System.Threading.Tasks;
 using ZeroApp.ForecastTracker.Service.Contracts.LoadLocationForecast;
 using ZeroApp.ForecastTracker.Service.Contracts.LoadLocations;
 
@@ -8,10 +9,9 @@ namespace ZeroApp.ForecastTracker.Service.Contracts
     public interface IForeCastService
     {
         [OperationContract]
-        LoadLocationsResponse LoadLocations(LoadLocationsRequest request);
+        Task<LoadLocationsResponse> LoadLocationsAsync(LoadLocationsRequest request);
 
         [OperationContract]
-        LoadLocationForecastResponse LoadLocationForecast(LoadLocationForecastRequest request);
-
+        Task<LoadLocationForecastResponse> LoadLocationForecastAsync(LoadLocationForecastRequest request);
     }
 }

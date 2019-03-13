@@ -4,7 +4,6 @@
     {
         public Location()
         {
-            
         }
 
         public Location(string name, decimal longitude, decimal latitude)

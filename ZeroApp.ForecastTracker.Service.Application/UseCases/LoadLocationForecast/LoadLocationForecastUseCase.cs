@@ -7,12 +7,13 @@ namespace ZeroApp.ForecastTracker.Service.Application.UseCases.LoadLocationForec
     public class LoadLocationForecastUseCase : ILoadLocationForecastUseCase
     {
         private readonly ILocationRepository _locationRepository;
-        private readonly IExternalService _externalService;
+        private readonly IGeoLocationService _geoLocationService;
 
-        public LoadLocationForecastUseCase(ILocationRepository locationRepository, IExternalService externalService)
+        public LoadLocationForecastUseCase(ILocationRepository locationRepository,
+            IGeoLocationService geoLocationService)
         {
             _locationRepository = locationRepository;
-            _externalService = externalService;
+            _geoLocationService = geoLocationService;
         }
 
         public async Task<LoadLocationForecastOutput> Execute(string name)
@@ -20,7 +21,7 @@ namespace ZeroApp.ForecastTracker.Service.Application.UseCases.LoadLocationForec
             var location = await _locationRepository.GetLocationByName(name);
             if (location == null) // this is business case check not exception handling
             {
-                var locationResponse = await _externalService.GetGeoLocationByName(name);
+                var locationResponse = await _geoLocationService.GetGeoLocationByName(name);
                 if (locationResponse == null)
                 {
                     await _locationRepository.SaveLocation(name, 0, 0);

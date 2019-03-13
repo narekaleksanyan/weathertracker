@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Dapper;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dapper;
 using ZeroApp.ForecastTracker.Service.Application.Repositories;
 using ZeroApp.ForecastTracker.Service.Domain.Location;
 using ZeroApp.ForecastTracker.Service.Infrastructure.Exceptions;
@@ -40,9 +40,16 @@ namespace ZeroApp.ForecastTracker.Service.Infrastructure.DapperDataAccess
             }
         }
 
-        public Task SaveLocation(string name, decimal longitude, decimal latitude)
+        public async Task SaveLocation(string name, decimal longitude, decimal latitude)
         {
-            throw new System.NotImplementedException();
+            using (var connection = CreateNewConnection())
+            {
+                var @params = new DynamicParameters();
+                @params.Add("@name", name);
+                @params.Add("@longitude", longitude);
+                @params.Add("@latitude", latitude);
+                await connection.ExecuteAsync("SaveLocation", @params);
+            }
         }
     }
 }

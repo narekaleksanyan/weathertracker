@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using ZeroApp.ForecastTracker.Client.Services;
+using ZeroApp.ForecastTracker.Service.Contracts.LoadLocationForecast;
 
 namespace ZeroApp.ForecastTracker.Client
 {
@@ -23,6 +12,13 @@ namespace ZeroApp.ForecastTracker.Client
         public MainWindow()
         {
             InitializeComponent();
+            Test();
+        }
+
+        private async void Test()
+        {
+            ForecastServiceClient client = new ForecastServiceClient();
+            var reponse =await client.LoadLocationForecastAsync(new LoadLocationForecastRequest());
         }
     }
 }
