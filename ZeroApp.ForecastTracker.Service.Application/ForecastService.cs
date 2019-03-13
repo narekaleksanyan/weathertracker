@@ -38,12 +38,12 @@ namespace ZeroApp.ForecastTracker.Service.Application
             {
                 ForecastItems = output.Forecasts.Select(x => new ForecastItem
                 {
-                    Longitude = x.Location.Longitude,
-                    Latitude = x.Location.Latitude,
-                    Name = x.Location.Name,
-                    LocationId = x.Location.Id,
-                    Wind =  x.Wind,
-                    Humidity = x.Humidity
+                    Longitude = x.Longitude,
+                    Latitude = x.Latitude,
+                    Name = x.Name,
+                    LocationId = x.Id,
+                    Wind = x.Forecast.Wind,
+                    Humidity = x.Forecast.Humidity
                 }).ToList()
             };
         }

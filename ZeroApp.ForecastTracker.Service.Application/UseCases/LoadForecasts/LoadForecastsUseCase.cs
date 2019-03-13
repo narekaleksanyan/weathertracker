@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using ZeroApp.ForecastTracker.Service.Application.ExternalServices;
 using ZeroApp.ForecastTracker.Service.Application.ExternalServices.Dtos;
 using ZeroApp.ForecastTracker.Service.Application.Repositories;
-using ZeroApp.ForecastTracker.Service.Domain.Forecast;
 using ZeroApp.ForecastTracker.Service.Domain.Location;
 
 namespace ZeroApp.ForecastTracker.Service.Application.UseCases.LoadForecasts
@@ -38,7 +37,8 @@ namespace ZeroApp.ForecastTracker.Service.Application.UseCases.LoadForecasts
             return new LoadForecastsOutput
             {
                 Forecasts = forecasts.Select(x =>
-                    Forecast.Load(x.Wind, x.Humidity, Location.Load(x.Id, x.Name, x.Longitude, x.Latitude))
+                    Location.Load(x.Id, x.Name, x.Longitude, x.Latitude,
+                        new Forecast {Wind = x.Wind, Humidity = x.Humidity})
                 ).ToList()
             };
         }
