@@ -51,5 +51,22 @@ namespace ZeroApp.ForecastTracker.Service.Infrastructure.DapperDataAccess
                 await connection.ExecuteAsync("SaveLocation", @params);
             }
         }
+
+        public async Task<Location> GetLocationById(int id, bool throwException = false)
+        {
+            using (var connection = CreateNewConnection())
+            {
+                var @params = new DynamicParameters();
+                @params.Add("@id", id);
+                var query = await connection.QueryAsync<Entities.Location>("GetLocationById", @params);
+                var location = query.Select(x => Location.Load(x.Id, x.Name, x.Longitude, x.Latitude)).FirstOrDefault();
+                if (throwException && location == null)
+                {
+                    throw new EntityNotFoundException("Id", id.ToString());
+                }
+
+                return location;
+            }
+        }
     }
 }

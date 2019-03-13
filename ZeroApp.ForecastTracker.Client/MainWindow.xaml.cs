@@ -1,6 +1,5 @@
 ﻿using System.Windows;
-using ZeroApp.ForecastTracker.Client.Services;
-using ZeroApp.ForecastTracker.Service.Contracts.LoadLocationForecast;
+using ZeroApp.ForecastTracker.Client.ViewModels;
 
 namespace ZeroApp.ForecastTracker.Client
 {
@@ -12,13 +11,7 @@ namespace ZeroApp.ForecastTracker.Client
         public MainWindow()
         {
             InitializeComponent();
-            Test();
-        }
-
-        private async void Test()
-        {
-            ForecastServiceClient client = new ForecastServiceClient();
-            var reponse =await client.LoadLocationForecastAsync(new LoadLocationForecastRequest());
+            DataContext = new MainViewModel();
         }
     }
 }

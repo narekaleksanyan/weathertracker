@@ -4,6 +4,6 @@ namespace ZeroApp.ForecastTracker.Service.Application.UseCases.LoadLocationForec
 {
     public interface ILoadLocationForecastUseCase
     {
-        Task<LoadLocationForecastOutput> Execute(string name);
+        Task<LoadLocationForecastOutput> Execute(int id);
     }
 }

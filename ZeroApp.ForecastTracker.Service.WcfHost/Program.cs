@@ -7,8 +7,8 @@ using ZeroApp.ForecastTracker.Service.Application;
 using ZeroApp.ForecastTracker.Service.Application.ExternalServices;
 using ZeroApp.ForecastTracker.Service.Application.Repositories;
 using ZeroApp.ForecastTracker.Service.Application.UseCases;
+using ZeroApp.ForecastTracker.Service.Application.UseCases.GetLocation;
 using ZeroApp.ForecastTracker.Service.Application.UseCases.LoadLocationForecast;
-using ZeroApp.ForecastTracker.Service.Application.UseCases.LoadLocations;
 using ZeroApp.ForecastTracker.Service.Contracts;
 using ZeroApp.ForecastTracker.Service.Infrastructure.DapperDataAccess;
 using ZeroApp.ForecastTracker.Service.Infrastructure.ExternalService;
@@ -62,7 +62,7 @@ namespace ZeroApp.ForecastTracker.Service.WcfHost
             builder.RegisterType<GeoLocationService>().As<IGeoLocationService>();
 
             builder.RegisterType<LoadLocationForecastUseCase>().As<ILoadLocationForecastUseCase>();
-            builder.RegisterType<LoadLocationUseCase>().As<ILoadLocationsUseCase>();
+            builder.RegisterType<LoadLocationUseCase>().As<ILoadLocationUseCase>();
 
             builder.RegisterType<UseCaseFactory>().As<IUseCaseFactory>();
             builder.RegisterType<ForecastService>();

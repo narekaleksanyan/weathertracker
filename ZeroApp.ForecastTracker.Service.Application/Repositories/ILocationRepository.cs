@@ -9,5 +9,6 @@ namespace ZeroApp.ForecastTracker.Service.Application.Repositories
         Task<List<Location>> GetAllLocations();
         Task<Location> GetLocationByName(string name,bool throwException = false);
         Task SaveLocation(string name, decimal longitude, decimal latitude);
+        Task<Location> GetLocationById(int id, bool throwException = false);
     }
 }

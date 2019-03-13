@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using ZeroApp.ForecastTracker.Service.Infrastructure.ExternalService.Dtos;
+using ZeroApp.ForecastTracker.Service.Application.ExternalServices.Dtos;
 
 namespace ZeroApp.ForecastTracker.Service.Application.ExternalServices
 {

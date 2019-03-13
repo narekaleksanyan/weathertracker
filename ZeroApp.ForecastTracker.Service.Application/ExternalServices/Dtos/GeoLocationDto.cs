@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ZeroApp.ForecastTracker.Service.Infrastructure.ExternalService.Dtos
+﻿namespace ZeroApp.ForecastTracker.Service.Application.ExternalServices.Dtos
 {
     public class GeoLocationDto
     {
@@ -13,6 +7,16 @@ namespace ZeroApp.ForecastTracker.Service.Infrastructure.ExternalService.Dtos
 
     public class ForecastDto
     {
+        public string Wind { get; set; }
 
+        public string Humidity { get; set; }
+
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public decimal Longitude { get; set; }
+
+        public decimal Latitude { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using ZeroApp.ForecastTracker.Service.Contracts;
+using ZeroApp.ForecastTracker.Service.Contracts.LoadForecasts;
+using ZeroApp.ForecastTracker.Service.Contracts.LoadLocation;
 using ZeroApp.ForecastTracker.Service.Contracts.LoadLocationForecast;
-using ZeroApp.ForecastTracker.Service.Contracts.LoadLocations;
+using ZeroApp.ForecastTracker.Service.Contracts.SaveLocation;
 
 namespace ZeroApp.ForecastTracker.Client.Services
 {
@@ -21,7 +23,8 @@ namespace ZeroApp.ForecastTracker.Client.Services
         {
         }
 
-        public ForecastServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) :
+        public ForecastServiceClient(string endpointConfigurationName,
+            System.ServiceModel.EndpointAddress remoteAddress) :
             base(endpointConfigurationName, remoteAddress)
         {
         }
@@ -32,14 +35,24 @@ namespace ZeroApp.ForecastTracker.Client.Services
         {
         }
 
-        public async Task<LoadLocationsResponse> LoadLocationsAsync(LoadLocationsRequest request)
+        public async Task<LoadForecastsResponse> LoadForecastsAsync(LoadForecastsRequest request)
         {
-            return await Channel.LoadLocationsAsync(request);
+            return await Channel.LoadForecastsAsync(request);
         }
 
-        public async Task<LoadLocationForecastResponse> LoadLocationForecastAsync(LoadLocationForecastRequest request)
+        public Task<SaveLocationResponse> SaveLocationAsync(SaveLocationRequest request)
         {
-            return await Channel.LoadLocationForecastAsync(request);
+            throw new System.NotImplementedException();
+        }
+
+        public Task<LoadLocationResponse> LoadLocationAsync(LoadLocationRequest request)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<LoadLocationForecastResponse> LoadLocationForecastAsync(LoadLocationForecastRequest request)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:ZeroApp.ForecastTracker.Client"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button></Button>
-    </Grid>
+    <StackPanel Orientation="Vertical">
+        <TextBox Text="{Binding PlaceName, UpdateSourceTrigger=PropertyChanged}"  Width="200" Height="20" HorizontalAlignment="Left">
+            <TextBox.InputBindings>
+                <KeyBinding Command="{Binding EnterCommand}" Key="Return" />
+            </TextBox.InputBindings>
+        </TextBox>
+        <DataGrid ItemsSource="{Binding Path=Locations}"></DataGrid>
+    </StackPanel>
 </Window>

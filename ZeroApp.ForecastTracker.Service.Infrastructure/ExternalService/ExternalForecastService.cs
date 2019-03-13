@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using ZeroApp.ForecastTracker.Service.Application.ExternalServices;
-using ZeroApp.ForecastTracker.Service.Infrastructure.ExternalService.Dtos;
+using ZeroApp.ForecastTracker.Service.Application.ExternalServices.Dtos;
 
 namespace ZeroApp.ForecastTracker.Service.Infrastructure.ExternalService
 {
@@ -10,7 +10,7 @@ namespace ZeroApp.ForecastTracker.Service.Infrastructure.ExternalService
         {
         }
 
-        public Task<ForecastDto> GetForecast(decimal longitude, decimal latitude)
+        public async Task<ForecastDto> GetForecast(decimal longitude, decimal latitude)
         {
             throw new System.NotImplementedException();
         }
