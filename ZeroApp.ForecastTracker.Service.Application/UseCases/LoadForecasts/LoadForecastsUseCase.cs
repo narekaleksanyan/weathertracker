@@ -24,15 +24,17 @@ namespace ZeroApp.ForecastTracker.Service.Application.UseCases.LoadForecasts
         {
             var locations = await _locationRepository.GetAllLocations();
             var forecasts = new List<ForecastDto>();
-            Parallel.ForEach(locations, async x =>
+            var tasks = locations.Select(async x =>
             {
-               var forecast = await  _externalForecastService.GetForecast(x.Longitude, x.Latitude);
-               forecast.Latitude = x.Latitude;
-               forecast.Longitude = x.Longitude;
-               forecast.Name = x.Name;
-               forecast.Id = x.Id;
-               forecasts.Add(forecast);
+                var forecast = await _externalForecastService.GetForecast(x.Longitude, x.Latitude);
+                forecast.Latitude = x.Latitude;
+                forecast.Longitude = x.Longitude;
+                forecast.Name = x.Name;
+                forecast.Id = x.Id;
+                forecasts.Add(forecast);
             });
+
+            await Task.WhenAll(tasks);
 
             return new LoadForecastsOutput
             {
