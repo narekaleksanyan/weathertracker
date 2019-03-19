@@ -6,6 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroApp.ForecastTracker.Client", "ZeroApp.ForecastTracker.Client\ZeroApp.ForecastTracker.Client.csproj", "{707B1561-A45C-4CD5-BECD-DB0B64DB3F8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{14755518-29B3-4F08-AA20-A194654E354E}"
+	ProjectSection(SolutionItems) = preProject
+		Database\testdb.mdf = Database\testdb.mdf
+		Database\testdb_log.ldf = Database\testdb_log.ldf
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZeroApp.ForecastTracker.Service", "ZeroApp.ForecastTracker.Service", "{42534FDB-6066-4008-9668-FB59C25ED0F6}"
 EndProject
