@@ -12,6 +12,6 @@
                 <KeyBinding Command="{Binding EnterCommand}" Key="Return" />
             </TextBox.InputBindings>
         </TextBox>
-        <DataGrid ItemsSource="{Binding Path=Locations}"></DataGrid>
+        <DataGrid IsReadOnly="True" ItemsSource="{Binding Path=LocationsForecasts}"></DataGrid>
     </StackPanel>
 </Window>

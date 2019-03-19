@@ -5,6 +5,6 @@ namespace ZeroApp.ForecastTracker.Service.Contracts.SaveLocation
     [DataContract]
     public class SaveLocationResponse
     {
-        public int LocationId { get; set; }
+        [DataMember] public int LocationId { get; set; }
     }
 }

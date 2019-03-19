@@ -6,7 +6,7 @@ namespace ZeroApp.ForecastTracker.Service.Contracts.SaveLocation
     public class SaveLocationRequest
     {
         [DataMember] public string Name { get; set; }
-        [DataMember] public decimal Longitude { get; set; }
-        [DataMember] public decimal Latitude { get; set; }
+        [DataMember] public double Longitude { get; set; }
+        [DataMember] public double Latitude { get; set; }
     }
 }

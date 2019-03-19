@@ -20,9 +20,19 @@ namespace ZeroApp.ForecastTracker.Service.Application.UseCases.LoadLocationForec
         {
             var location = await _locationRepository.GetLocationById(id);
             var forecast = await _externalForecastService.GetForecast(location.Longitude, location.Latitude);
-
-            
-            return new LoadLocationForecastOutput();
+            return new LoadLocationForecastOutput
+            {
+                Longitude = location.Longitude,
+                Latitude = location.Latitude,
+                Wind = forecast.Wind,
+                Humidity = forecast.Humidity,
+                LocationId = location.Id,
+                LocationName = location.Name,
+                Time = forecast.Time,
+                Summary = forecast.Summary,
+                Timezone = forecast.Timezone,
+                Temperature = forecast.Temperature
+            };
         } 
     }
 }

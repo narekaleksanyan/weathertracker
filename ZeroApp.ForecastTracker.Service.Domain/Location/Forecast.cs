@@ -2,8 +2,16 @@
 {
     public class Forecast
     {
-        public string Wind { get; set; }
+        public float Wind { get; set; }
 
-        public string Humidity { get; set; }
+        public float Humidity { get; set; }
+
+        public float Temperature { get; set; }
+
+        public string Timezone { get; set; }
+
+        public long Time { get; set; }
+
+        public string Summary { get; set; }
     }
 }

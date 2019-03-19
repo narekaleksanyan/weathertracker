@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using ZeroApp.ForecastTracker.Service.Application.Repositories;
@@ -29,8 +30,10 @@ namespace ZeroApp.ForecastTracker.Service.Infrastructure.DapperDataAccess
             {
                 var @params = new DynamicParameters();
                 @params.Add("@Name", name);
-                var query = await connection.QueryAsync<Entities.Location>("GetLocationByName", @params);
-                var location = query.Select(x => Location.Load(x.Id, x.Name, x.Longitude, x.Latitude,null)).FirstOrDefault();
+                var query = await connection.QueryAsync<Entities.Location>("GetLocationByName", @params,
+                    commandType: CommandType.StoredProcedure);
+                var location = query.Select(x => Location.Load(x.Id, x.Name, x.Longitude, x.Latitude, null))
+                    .FirstOrDefault();
                 if (throwException && location == null)
                 {
                     throw new EntityNotFoundException("Name", name);
@@ -40,7 +43,7 @@ namespace ZeroApp.ForecastTracker.Service.Infrastructure.DapperDataAccess
             }
         }
 
-        public async Task SaveLocation(string name, decimal longitude, decimal latitude)
+        public async Task<int> SaveLocation(string name, double longitude, double latitude)
         {
             using (var connection = CreateNewConnection())
             {
@@ -48,7 +51,9 @@ namespace ZeroApp.ForecastTracker.Service.Infrastructure.DapperDataAccess
                 @params.Add("@name", name);
                 @params.Add("@longitude", longitude);
                 @params.Add("@latitude", latitude);
-                await connection.ExecuteAsync("SaveLocation", @params);
+                @params.Add("@NewId", DbType.Int32, direction: ParameterDirection.Output);
+                await connection.ExecuteAsync("SaveLocation", @params, commandType: CommandType.StoredProcedure);
+                return @params.Get<int>("@NewId");
             }
         }
 
@@ -58,8 +63,10 @@ namespace ZeroApp.ForecastTracker.Service.Infrastructure.DapperDataAccess
             {
                 var @params = new DynamicParameters();
                 @params.Add("@id", id);
-                var query = await connection.QueryAsync<Entities.Location>("GetLocationById", @params);
-                var location = query.Select(x => Location.Load(x.Id, x.Name, x.Longitude, x.Latitude,null)).FirstOrDefault();
+                var query = await connection.QueryAsync<Entities.Location>("GetLocationById", @params,
+                    commandType: CommandType.StoredProcedure);
+                var location = query.Select(x => Location.Load(x.Id, x.Name, x.Longitude, x.Latitude, null))
+                    .FirstOrDefault();
                 if (throwException && location == null)
                 {
                     throw new EntityNotFoundException("Id", id.ToString());

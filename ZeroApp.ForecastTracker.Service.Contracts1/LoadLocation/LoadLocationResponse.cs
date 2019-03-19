@@ -7,7 +7,8 @@ namespace ZeroApp.ForecastTracker.Service.Contracts.LoadLocation
     {
         [DataMember] public int? Id { get; set; }
         [DataMember] public string Name { get; set; }
-        [DataMember] public decimal Longitude { get; set; }
-        [DataMember] public decimal Latitude { get; set; }
+        [DataMember] public double Longitude { get; set; }
+        [DataMember] public double Latitude { get; set; }
+        [DataMember] public int StatusCode { get; set; }
     }
 }

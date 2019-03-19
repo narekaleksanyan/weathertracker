@@ -40,7 +40,15 @@ namespace ZeroApp.ForecastTracker.Service.Application.UseCases.LoadForecasts
             {
                 Forecasts = forecasts.Select(x =>
                     Location.Load(x.Id, x.Name, x.Longitude, x.Latitude,
-                        new Forecast {Wind = x.Wind, Humidity = x.Humidity})
+                        new Forecast
+                        {
+                            Wind = x.Wind,
+                            Humidity = x.Humidity,
+                            Summary = x.Summary,
+                            Time = x.Time,
+                            Temperature = x.Temperature,
+                            Timezone = x.Timezone
+                        })
                 ).ToList()
             };
         }

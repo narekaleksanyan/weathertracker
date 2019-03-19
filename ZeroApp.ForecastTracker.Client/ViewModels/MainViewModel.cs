@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using ZeroApp.ForecastTracker.Client.Commands;
@@ -23,58 +23,86 @@ namespace ZeroApp.ForecastTracker.Client.ViewModels
             LocationsForecasts = new ObservableCollection<ForecastItem>();
             var timer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(30)};
             timer.Tick += Timer_Tick; ;
-            timer.Start();
+         //   timer.Start();
+             UpdateDataGrid();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            LoadForecasts();
+           UpdateDataGrid();
         }
 
-        public string PlaceName { get; set; }
+        private string _placeName;
+
+        public string PlaceName
+        {
+            get => _placeName;
+            set
+            {
+                _placeName = value;
+                OnPropertyChanged(this, "PlaceName");
+            }
+        }
 
         public ObservableCollection<ForecastItem> LocationsForecasts { get; set; }
-
-        private async void LoadForecasts()
+        
+        private async void AddNewForecast()
         {
-            var response = await _foreCastService.LoadForecastsAsync(new LoadForecastsRequest());
-            LocationsForecasts = new ObservableCollection<ForecastItem>(response.ForecastItems);
-        }
-
-        private async Task<int> LoadLocation()
-        {
-            int locationId;
-            var response = await _foreCastService.LoadLocationAsync(new LoadLocationRequest {Name = PlaceName});
-            if (!response.Id.HasValue)
+            var locationResponse = await _foreCastService.LoadLocationAsync(new LoadLocationRequest { Name = PlaceName });
+            if (locationResponse.Id.HasValue)
             {
-                var saveResponse = await _foreCastService.SaveLocationAsync(new SaveLocationRequest
-                    {Latitude = response.Latitude, Longitude = response.Latitude, Name = response.Name});
-                locationId = saveResponse.LocationId;
+                MessageBox.Show("Location already exists");
+                PlaceName = null;
             }
             else
             {
-                locationId = response.Id.Value;
-            }
+                if (locationResponse.StatusCode == 404)
+                {
+                    MessageBox.Show("This location does not exist on the glob");
+                    PlaceName = null;
+                    return;
+                }
 
-            return locationId;
+                var saveResponse = await _foreCastService.SaveLocationAsync(new SaveLocationRequest
+                {
+                    Latitude = locationResponse.Latitude,
+                    Longitude = locationResponse.Longitude,
+                    Name = locationResponse.Name
+                });
+
+                var response = await _foreCastService.LoadLocationForecastAsync(new LoadLocationForecastRequest
+                    {LocationId = saveResponse.LocationId});
+                LocationsForecasts.Add(new ForecastItem
+                {
+                    Longitude = response.Longitude,
+                    Latitude = response.Latitude,
+                    Name = response.Name,
+                    Wind = response.Wind,
+                    Humidity = response.Humidity,
+                    LocationId = response.Id,
+                    Time = response.Time,
+                    Summary = response.Summary,
+                    Temperature = response.Temperature,
+                    Timezone = response.Timezone
+                });
+                PlaceName = null;
+            }
         }
 
-        private async void LoadLocationForecast()
+        private async void UpdateDataGrid()
         {
-            var locationId = await LoadLocation();
-            var response = await _foreCastService.LoadLocationForecastAsync(new LoadLocationForecastRequest
-                {LocationId = locationId});
-            LocationsForecasts.Add(new ForecastItem
+            var response = await _foreCastService.LoadForecastsAsync(new LoadForecastsRequest());
+            LocationsForecasts.Clear();
+            foreach (var item in response.ForecastItems)
             {
-                Longitude = response.Longitude, Latitude = response.Latitude, Name = response.Name,
-                Wind = response.Wind, Humidity = response.Humidity, LocationId = response.Id
-            });
+                LocationsForecasts.Add(item);
+            }
         }
 
         private ICommand _enterCommand;
         public ICommand EnterCommand
         {
-            get => _enterCommand ?? (_enterCommand = new EnterCommand(LoadLocationForecast));
+            get => _enterCommand ?? (_enterCommand = new EnterCommand(AddNewForecast));
             set => _enterCommand = value;
         }
     }

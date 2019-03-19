@@ -5,6 +5,6 @@ namespace ZeroApp.ForecastTracker.Service.Application.ExternalServices
 {
     public interface IExternalForecastService
     {
-        Task<ForecastDto> GetForecast(decimal longitude, decimal latitude);
+        Task<ForecastDto> GetForecast(double longitude, double latitude);
     }
 }

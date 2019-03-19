@@ -4,6 +4,6 @@ namespace ZeroApp.ForecastTracker.Service.Application.UseCases.SaveLocation
 {
     public interface ISaveLocationUseCase
     {
-        Task Execute(string name, decimal longitude, decimal latitude);
+        Task<int> Execute(string name, double longitude, double latitude);
     }
 }

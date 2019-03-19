@@ -11,9 +11,10 @@ namespace ZeroApp.ForecastTracker.Service.Application.UseCases.SaveLocation
             _locationRepository = locationRepository;
         }
 
-        public async Task Execute(string name, decimal longitude, decimal latitude)
+        public async Task<int> Execute(string name, double longitude, double latitude)
         {
-            await _locationRepository.SaveLocation(name, longitude, latitude);
+           var id = await _locationRepository.SaveLocation(name, longitude, latitude);
+           return id;
         }
     }
 }

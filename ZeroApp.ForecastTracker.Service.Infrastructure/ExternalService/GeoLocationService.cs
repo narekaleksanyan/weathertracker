@@ -1,28 +1,44 @@
-﻿using RestSharp;
+﻿using OpenCage.Geocode;
+using System.Linq;
 using System.Threading.Tasks;
 using ZeroApp.ForecastTracker.Service.Application.ExternalServices;
 using ZeroApp.ForecastTracker.Service.Application.ExternalServices.Dtos;
 
 namespace ZeroApp.ForecastTracker.Service.Infrastructure.ExternalService
 {
-    public class GeoLocationService : ExternalRestServiceBase, IGeoLocationService
+    public class GeoLocationService :  IGeoLocationService
     {
-        public GeoLocationService(IRestServiceSettings settings) : base(settings)
+        private readonly IGeoLocationServiceSettings _settings;
+        public GeoLocationService(IGeoLocationServiceSettings settings)
         {
-        }
-   
-        public async Task<GeoLocationDto> GetGeoLocationByName(string name)
-        {
-            var url = BuildGetGeoLocationUrl(name);
-            var client = new RestClient(url);
-            var request = new RestRequest("", Method.GET);
-            var response = await client.GetAsync<GeoLocationDto>(request);
-            return response;
+            _settings = settings;
         }
 
-        private  string BuildGetGeoLocationUrl(string name)
+        public async Task<GeoLocationDto> GetGeoLocationByName(string name)
         {
-            return $"{Settings.BaseAddress}?q={name}&key={Settings.ApiKey}";
+            var response = await CallApi(_settings.ApiKey, name);
+            if (response.Status.Code != 200)
+            {
+                return new GeoLocationDto {StatusCode = 500};
+            }
+
+            if (!response.Results.Any())
+            {
+                return new GeoLocationDto {StatusCode = 404};
+            }
+
+            var longitude = response.Results.First().Geometry.Longitude;
+            var latitude = response.Results.First().Geometry.Latitude;
+
+            return new GeoLocationDto {StatusCode = 200, Longitude = longitude, Latitude = latitude};
+        }
+
+        private static async Task<GeocoderResponse> CallApi(string apiKey, string query)
+        {
+            GeocoderResponse response = null;
+            var gc = new Geocoder(apiKey);
+            await Task.Run(() => { response = gc.Geocode(query); });
+            return response;
         }
     }
 }

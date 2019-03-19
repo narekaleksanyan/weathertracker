@@ -6,7 +6,7 @@
         {
         }
 
-        public Location(string name, decimal longitude, decimal latitude, Forecast forecast)
+        public Location(string name, double longitude, double latitude, Forecast forecast)
         {
             Name = name;
             Longitude = longitude;
@@ -18,13 +18,13 @@
 
         public string Name { get; private set; }
 
-        public decimal Longitude { get; private set; }
+        public double Longitude { get; private set; }
 
-        public decimal Latitude { get; private set; }
+        public double Latitude { get; private set; }
 
         public Forecast Forecast { get; private set; }
 
-        public static Location Load(int id, string name, decimal longitude, decimal latitude, Forecast forecast)
+        public static Location Load(int id, string name, double longitude, double latitude, Forecast forecast)
         {
             var location = new Location
                 {Id = id, Name = name, Longitude = longitude, Latitude = latitude, Forecast = forecast};

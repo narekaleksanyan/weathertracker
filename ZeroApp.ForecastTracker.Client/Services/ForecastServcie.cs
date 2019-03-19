@@ -40,19 +40,19 @@ namespace ZeroApp.ForecastTracker.Client.Services
             return await Channel.LoadForecastsAsync(request);
         }
 
-        public Task<SaveLocationResponse> SaveLocationAsync(SaveLocationRequest request)
+        public async Task<SaveLocationResponse> SaveLocationAsync(SaveLocationRequest request)
         {
-            throw new System.NotImplementedException();
+            return await Channel.SaveLocationAsync(request);
         }
 
-        public Task<LoadLocationResponse> LoadLocationAsync(LoadLocationRequest request)
+        public async Task<LoadLocationResponse> LoadLocationAsync(LoadLocationRequest request)
         {
-            throw new System.NotImplementedException();
+            return await Channel.LoadLocationAsync(request);
         }
 
-        public Task<LoadLocationForecastResponse> LoadLocationForecastAsync(LoadLocationForecastRequest request)
+        public async Task<LoadLocationForecastResponse> LoadLocationForecastAsync(LoadLocationForecastRequest request)
         {
-            throw new System.NotImplementedException();
+            return await Channel.LoadLocationForecastAsync(request);
         }
     }
 }

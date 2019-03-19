@@ -20,16 +20,24 @@ namespace ZeroApp.ForecastTracker.Service.Application.UseCases.GetLocation
             var location = await _locationRepository.GetLocationByName(name);
             if (location != null)
             {
-                return new LoadLocationOutput {Location = location};
+                return new LoadLocationOutput
+                {
+                    Id = location.Id,
+                    Longitude = location.Longitude,
+                    Latitude = location.Latitude,
+                    Name = location.Name
+                };
             }
 
             var response = await _geoLocationService.GetGeoLocationByName(name);
-            if (response == null)
-            {
-                return new LoadLocationOutput {IsFromApi = true};
-            }
 
-            return new LoadLocationOutput {IsFromApi = true};
+            return new LoadLocationOutput
+            {
+                Longitude = response.Longitude,
+                Latitude = response.Latitude,
+                Name = name,
+                StatusCode = response.StatusCode
+            };
         }
     }
 }

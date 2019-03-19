@@ -21,14 +21,32 @@ namespace ZeroApp.ForecastTracker.Service.Application
         public async Task<LoadLocationResponse> LoadLocationAsync(LoadLocationRequest request)
         {
             var output = await _useCaseFactory.LoadLocationUseCase.Execute(request.Name);
-
-            return new LoadLocationResponse();
+            return new LoadLocationResponse
+            {
+                Longitude = output.Longitude,
+                Latitude = output.Latitude,
+                Name = output.Name,
+                Id = output.Id,
+                StatusCode = output.StatusCode
+            };
         }
 
         public async Task<LoadLocationForecastResponse> LoadLocationForecastAsync(LoadLocationForecastRequest request)
         {
             var output = await _useCaseFactory.LoadLocationForecastUseCase.Execute(request.LocationId);
-            return new LoadLocationForecastResponse { };
+            return new LoadLocationForecastResponse
+            {
+                Longitude = output.Longitude,
+                Latitude = output.Latitude,
+                Id = output.LocationId,
+                Name = output.LocationName,
+                Wind = output.Wind,
+                Humidity = output.Humidity,
+                Time = output.Time,
+                Summary = output.Summary,
+                Timezone = output.Timezone,
+                Temperature = output.Temperature
+            };
         }
 
         public async Task<LoadForecastsResponse> LoadForecastsAsync(LoadForecastsRequest request)
@@ -43,15 +61,20 @@ namespace ZeroApp.ForecastTracker.Service.Application
                     Name = x.Name,
                     LocationId = x.Id,
                     Wind = x.Forecast.Wind,
-                    Humidity = x.Forecast.Humidity
+                    Humidity = x.Forecast.Humidity,
+                    Time = x.Forecast.Time,
+                    Summary = x.Forecast.Summary,
+                    Temperature = x.Forecast.Temperature,
+                    Timezone = x.Forecast.Timezone
                 }).ToList()
             };
         }
 
         public async Task<SaveLocationResponse> SaveLocationAsync(SaveLocationRequest request)
         {
-            await _useCaseFactory.SaveLocationUseCase.Execute(request.Name, request.Longitude, request.Latitude);
-            return new SaveLocationResponse();
+            var id = await _useCaseFactory.SaveLocationUseCase.Execute(request.Name, request.Longitude,
+                request.Latitude);
+            return new SaveLocationResponse {LocationId = id};
         }
     }
 }
