@@ -23,7 +23,7 @@ namespace ZeroApp.ForecastTracker.Client.ViewModels
             LocationsForecasts = new ObservableCollection<ForecastItem>();
             var timer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(30)};
             timer.Tick += Timer_Tick; ;
-         //   timer.Start();
+             timer.Start();
              UpdateDataGrid();
         }
 
